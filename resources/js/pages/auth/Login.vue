@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import { register } from '@/routes';
 import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import type { TeamInvitationContext } from '@/types';
@@ -23,6 +24,7 @@ defineOptions({
 defineProps<{
     status?: string;
     canResetPassword: boolean;
+    canRegister?: boolean;
     teamInvitation?: TeamInvitationContext | null;
 }>();
 </script>
@@ -107,4 +109,12 @@ defineProps<{
             </Button>
         </div>
     </Form>
+
+    <div
+        v-if="canRegister"
+        class="mt-6 text-center text-sm text-muted-foreground"
+    >
+        Don't have an account?
+        <TextLink :href="register()" :tabindex="6">Sign up</TextLink>
+    </div>
 </template>

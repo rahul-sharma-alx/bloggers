@@ -1,4 +1,6 @@
+import { createApp, h, type DefineComponent } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
+import { MotionPlugin } from '@vueuse/motion';
 import { initializeTheme } from '@/composables/useAppearance';
 import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
@@ -24,6 +26,12 @@ createInertiaApp({
     },
     progress: {
         color: '#4B5563',
+    },
+    setup({ el, App, props, plugin }) {
+        const app = createApp({ render: () => h(App as DefineComponent, props) });
+        app.use(plugin);
+        app.use(MotionPlugin);
+        app.mount(el);
     },
 });
 
